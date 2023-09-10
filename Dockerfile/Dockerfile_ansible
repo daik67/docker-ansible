@@ -1,0 +1,30 @@
+# ベースイメージ
+FROM rockylinux:8.6
+
+# 変数定義
+ARG ANSIBLE_VERSION
+
+# 必要なパッケージのインストール
+RUN dnf -y install python39 && \
+    dnf -y install openssh-clients \
+    sshpass && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf/*
+
+# Ansibleのインストール
+RUN python3 -m pip install --no-cache-dir ansible==$ANSIBLE_VERSION
+
+# ロケールを日本語に設定
+RUN dnf -y install glibc-locale-source glibc-langpack-en && \
+    dnf clean all && \
+    rm -rf /var/cache/dnf/*
+RUN localedef -f UTF-8 -i ja_JP ja_JP.utf8
+RUN echo 'LANG="ja_JP.UTF-8"' >  /etc/locale.conf
+
+# タイムゾーンをJSTに設定
+RUN echo 'ZONE="Asia/Tokyo"' > /etc/sysconfig/clock
+RUN rm -f /etc/localtime
+RUN ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
+# コンテナログイン時のカレントディレクトリを設定
+WORKDIR /work/ansible

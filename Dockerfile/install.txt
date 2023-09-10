@@ -1,0 +1,42 @@
+cd ./Dockerfile/
+
+インストールしたいAnsibleのバージョンを環境変数に格納
+# export ANSIBLE_VERSION=8.3.0
+
+Dockerイメージをビルド
+# docker build --no-cache=true -f Dockerfile_ansible -t ansible:$ANSIBLE_VERSION --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION .
+
+ビルドされたイメージを確認
+# docker images | grep ansible | grep $ANSIBLE_VERSION
+ansible               8.3.0     ac001dbb28c2   2 minutes ago   657MB
+
+ビルドされたイメージを起動し、想定通りのAnsibleバージョンがインストールされたことを確認
+# docker run --rm -it ansible:$ANSIBLE_VERSION python3 -m pip freeze | grep ansible
+ansible==8.3.0
+ansible-core==2.13.4
+
+cd ../ansible_project
+
+export ANSIBLE_VERSION=8.3.0
+
+docker run --rm -it -v /root/.ssh/:/root/.ssh/ -v /home/adminuser/ansible/ansible_project:/work/ansible ansible:$ANSIBLE_VERSION ls -l
+
+docker run --rm -it -v /root/.ssh/:/root/.ssh/ -v /home/adminuser/ansible/ansible_project:/work/ansible ansible:$ANSIBLE_VERSION ansible-playbook -i inventories/production/hosts site.yml
+
+docker run --rm -it -v /home/adminuser/.ssh/:/root/.ssh/ -v /home/adminuser/ansible/ansible_project:/work/ansible ansible:$ANSIBLE_VERSION ansible-playbook -i inventories/production/hosts site.yml
+
+ansible
+|-- ansible.cfg
+|-- inventories
+|   `-- production
+|       |-- group_vars
+|       |   `-- testservers.yml
+|       `-- hosts
+|-- roles
+|   `-- test
+|       |-- files
+|       |   `-- test.txt
+|       `-- tasks
+|           `-- main.yml
+|-- site.yml
+`-- testservers.yml
