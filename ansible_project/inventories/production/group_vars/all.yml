@@ -4,5 +4,4 @@ ansible_user_password: '1qaz2wsx'
 ansible_become: true
 ansible_become_user: root
 ansible_become_method: su
-ansible_become_password: 1qaz2wsx
-remote_user: adminuser
+ansible_become_password: '1qaz2wsx'
