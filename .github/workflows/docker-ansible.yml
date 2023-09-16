@@ -31,8 +31,8 @@ jobs:
           cd ./ansible_project
           export ANSIBLE_VERSION=8.3.0
           docker images | grep ansible | grep $ANSIBLE_VERSION
-          docker run --rm -it ansible:$ANSIBLE_VERSION python3 -m pip freeze | grep ansible
-          docker run --rm -it \
+          docker run --rm -i ansible:$ANSIBLE_VERSION python3 -m pip freeze | grep ansible
+          docker run --rm -i \
           -v /home/adminuser/.ssh/:/root/.ssh/ \
           -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible_project ansible:$ANSIBLE_VERSION \
           ls -l
@@ -41,7 +41,7 @@ jobs:
         run: |
           cd ./ansible_project
           export ANSIBLE_VERSION=8.3.0
-          docker run --rm -it \
+          docker run --rm -i \
           -v /home/adminuser/.ssh/:/root/.ssh/ \
           -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible_project \
           ansible:$ANSIBLE_VERSION \
