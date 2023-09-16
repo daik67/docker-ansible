@@ -37,12 +37,13 @@ jobs:
           docker run --rm -i \
           -v /home/adminuser/.ssh/:/root/.ssh/ \
           -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project/:/work/ansible_project/ ansible:$ANSIBLE_VERSION \
-          ls -la && pwd
+          pwd
       
       - name: run docker ansible
         run: |
           cd ./ansible_project
           pwd
+          ls -al
           export ANSIBLE_VERSION=8.3.0
           docker run --rm -i \
           -v /home/adminuser/.ssh/:/root/.ssh/ \
