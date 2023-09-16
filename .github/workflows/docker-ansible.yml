@@ -45,7 +45,7 @@ jobs:
           pwd
           ls -al
           export ANSIBLE_VERSION=8.3.0
-          docker run --rm -i --net=host \
+          docker run --rm -i --network=host \
           -v /home/adminuser/.ssh/:/root/.ssh/ \
           -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible ansible:$ANSIBLE_VERSION \
           ansible-playbook -i inventories/production/hosts site.yml -vvv --extra-vars="ansible_become_password=1qaz2wsx"
