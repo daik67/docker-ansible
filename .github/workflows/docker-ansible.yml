@@ -35,7 +35,7 @@ jobs:
           docker run --rm -i \
           -v /home/adminuser/.ssh/:/root/.ssh/ \
           -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible_project ansible:$ANSIBLE_VERSION \
-          ls -l
+          ls -la
       
       - name: run docker run
         run: |
@@ -46,4 +46,4 @@ jobs:
           -v /home/adminuser/.ssh/:/root/.ssh/ \
           -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible_project \
           ansible:$ANSIBLE_VERSION \
-          ansible-playbook -i inventories/production/hosts site.yml
+          ansible-playbook -i inventories/production/hosts site.yml -vvv
