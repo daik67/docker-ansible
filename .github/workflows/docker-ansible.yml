@@ -1,0 +1,48 @@
+# This is a basic workflow to help you get started with Actions
+
+name: test
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: self-hosted
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Run docker buile
+        run: |
+          export ANSIBLE_VERSION=8.3.0
+          docker build --no-cache=true -f ./Dockerfile/Dockerfile_ansible -t ansible:$ANSIBLE_VERSION --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION .
+
+      # Runs a set of commands using the runners shell
+      - name: test docker run
+        run: |
+          cd ./ansible_project
+          export ANSIBLE_VERSION=8.3.0
+          docker images | grep ansible | grep $ANSIBLE_VERSION
+          docker run --rm -it ansible:$ANSIBLE_VERSION python3 -m pip freeze | grep ansible
+          docker run --rm -it \
+          -v /home/adminuser/.ssh/:/root/.ssh/ \
+          -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible_project ansible:$ANSIBLE_VERSION \
+          ls -l
+      
+      - name: run docker run
+        run: |
+          cd ./ansible_project
+          export ANSIBLE_VERSION=8.3.0
+          docker run --rm -it \
+          -v /home/adminuser/.ssh/:/root/.ssh/ \
+          -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible_project \
+          ansible:$ANSIBLE_VERSION \
+          ansible-playbook -i inventories/production/hosts site.yml
