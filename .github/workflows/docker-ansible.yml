@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Run docker buile
+      - name: build docker ansible
         run: |
           export ANSIBLE_VERSION=8.3.0
           docker build --no-cache=true -f ./Dockerfile/Dockerfile_ansible -t ansible:$ANSIBLE_VERSION --build-arg ANSIBLE_VERSION=$ANSIBLE_VERSION .
@@ -35,15 +35,14 @@ jobs:
           docker run --rm -i \
           -v /home/adminuser/.ssh/:/root/.ssh/ \
           -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible_project ansible:$ANSIBLE_VERSION \
-          ls -la
+          ls -la && pwd
       
-      - name: run docker run
+      - name: run docker ansible
         run: |
           cd ./ansible_project
           pwd
           export ANSIBLE_VERSION=8.3.0
           docker run --rm -i \
           -v /home/adminuser/.ssh/:/root/.ssh/ \
-          -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible_project \
-          ansible:$ANSIBLE_VERSION \
+          -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible_project ansible:$ANSIBLE_VERSION \
           ansible-playbook -i inventories/production/hosts site.yml -vvv
