@@ -40,6 +40,7 @@ jobs:
       - name: run docker run
         run: |
           cd ./ansible_project
+          pwd
           export ANSIBLE_VERSION=8.3.0
           docker run --rm -i \
           -v /home/adminuser/.ssh/:/root/.ssh/ \
