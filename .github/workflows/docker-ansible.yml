@@ -35,7 +35,7 @@ jobs:
           docker images | grep ansible | grep $ANSIBLE_VERSION
           docker run --rm -i ansible:$ANSIBLE_VERSION python3 -m pip freeze | grep ansible
           docker run --rm -i \
-          -v /home/adminuser/.ssh/:/root/.ssh/ \
+          -v /root/.ssh/:/root/.ssh/ \
           -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project/:/work/ansible/ ansible:$ANSIBLE_VERSION \
           pwd
       
@@ -46,6 +46,6 @@ jobs:
           ls -al
           export ANSIBLE_VERSION=8.3.0
           docker run --rm -i --network=host \
-          -v /home/adminuser/.ssh/:/root/.ssh/ \
+          -v /root/.ssh/:/root/.ssh/ \
           -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible ansible:$ANSIBLE_VERSION \
           ansible-playbook -i inventories/production/hosts site.yml -vvv --extra-vars="ansible_become_password=1qaz2wsx"
