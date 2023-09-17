@@ -4,3 +4,5 @@
     src: "test.txt"
     dest: "/tmp"
     
+- name: setup module
+  ansible.builtin.setup: gather_subset

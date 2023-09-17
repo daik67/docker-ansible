@@ -1,3 +1,3 @@
 [testservers]
 10.0.2.21 ansible_user=adminuser ansible_password=1qaz2wsx
-10.0.2.22 ansible_user=adminuser ansible_password=1qaz2wsx ansible_bbecome_user=adminuser ansible_become_method=sudo ansible_become_password=1qaz2wsx
+10.0.2.22 ansible_user=adminuser ansible_password=1qaz2wsx ansible_become_user=adminuser ansible_become_method=sudo ansible_become_password=1qaz2wsx
