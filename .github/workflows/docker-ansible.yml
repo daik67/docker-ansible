@@ -50,11 +50,3 @@ jobs:
           -v /home/adminuser/.ssh/:/home/adminuser/.ssh/ \
           -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible ansible:$ANSIBLE_VERSION \
           ansible-playbook -i inventories/production/hosts site.yml -vvv
-
-      - name: run docker ansible
-        run: |
-          docker run --rm -i --network=host \
-          -v /root/.ssh/:/root/.ssh/ \
-          -v /home/adminuser/.ssh/:/home/adminuser/.ssh/ \
-          -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible ansible:$ANSIBLE_VERSION \
-          ansible 10.0.2.21 -m setup
