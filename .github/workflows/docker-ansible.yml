@@ -51,7 +51,7 @@ jobs:
           -v /home/adminuser/actions-runner/_work/docker-ansible/docker-ansible/ansible_project:/work/ansible ansible:$ANSIBLE_VERSION \
           ansible-playbook -i inventories/production/hosts site.yml -vvv
 
-      - name: run docker ansible
+      - name: run docker ansible2
         run: |
           cd ./ansible_project
           pwd
