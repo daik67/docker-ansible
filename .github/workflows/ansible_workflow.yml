@@ -7,14 +7,14 @@ on: workflow_dispatch
 
 jobs:
   setup:
-    runs-on: self-hosted
+    runs-on: [ self-hosted ]
 
     container:
       image: ghcr.io/daik67/ansible-image:latest
 
     steps:
     - name: Check out code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Configure SSH Key
       run: |
