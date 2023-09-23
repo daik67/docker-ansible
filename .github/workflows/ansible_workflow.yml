@@ -24,7 +24,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_MYSEC }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan 10.0.2.20 >> ~/.ssh/known_hosts
+        ssh-keyscan 10.0.2.21 >> ~/.ssh/known_hosts
 
     - name: Run Ansible Setup
       run: |
