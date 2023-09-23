@@ -11,6 +11,9 @@ jobs:
 
     container:
       image: ghcr.io/daik67/ansible-image:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: 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
 
     steps:
     - name: Check out code
