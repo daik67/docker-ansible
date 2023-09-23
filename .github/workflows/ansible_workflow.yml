@@ -13,7 +13,7 @@ jobs:
       image: ghcr.io/daik67/ansible-image:latest
       credentials:
         username: ${{ github.actor }}
-        password: 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
+        password: ${{ secrets.MY_SEC }}
 
     steps:
     - name: Check out code
