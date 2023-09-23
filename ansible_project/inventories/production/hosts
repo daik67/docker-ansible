@@ -3,8 +3,8 @@
 #ansible-client2 10.0.2.22
 
 [testservers:vars]
-#ansible_user=adminuser
-#ansible_password=1qaz2wsx
-#ansible_become_user=adminuser
-#ansible_become_method=sudo
-#ansible_become_password=1qaz2wsx
+ansible_user=adminuser
+ansible_password=1qaz2wsx
+ansible_become_user=adminuser
+ansible_become_method=sudo
+ansible_become_password=1qaz2wsx
