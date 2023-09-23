@@ -21,9 +21,8 @@ jobs:
 
     - name: Configure SSH Key
       run: |
-        echo "${{ secrets.MY_SEC }}" | docker login ghcr.io -u $ --password-stdin
         mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        echo "${{ secrets.SSH_MYSEC }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan ansible-object >> ~/.ssh/known_hosts
 
