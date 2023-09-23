@@ -21,7 +21,7 @@ jobs:
 
     - name: Configure SSH Key
       run: |
-        echo "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" | docker login ghcr.io -u $ --password-stdin
+        echo "${{ secrets.MY_SEC }}" | docker login ghcr.io -u $ --password-stdin
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
