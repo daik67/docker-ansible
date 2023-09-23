@@ -1,0 +1,29 @@
+name: Run Ansible Setup
+
+on: workflow_dispatch
+#  push:
+#    branches:
+#      - main # デプロイ対象のブランチを指定
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    container:
+      image: ghcr.io/daik67/ansible-image:latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Configure SSH Key
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan ansible-object >> ~/.ssh/known_hosts
+
+    - name: Run Ansible Setup
+      run: |
+        ansible --version
+        ansible-playbook -i ansible_project/inventories/production/hosts -e "ansible_ssh_user=adminuser" site.yml
