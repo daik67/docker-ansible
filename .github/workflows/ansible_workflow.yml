@@ -11,9 +11,9 @@ jobs:
 
     container:
       image: ghcr.io/daik67/ansible-image:latest
-    env:
-      DOCKER_USERNAME: ${{ github.actor }}
-      DOCKER_PASSWORD: ${{ secrets.MY_SEC }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.MY_SEC }}
 
     steps:
     - name: Check out code
@@ -24,7 +24,7 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_MYSEC }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan ansible-client >> ~/.ssh/known_hosts
+        ssh-keyscan 10.0.2.20 >> ~/.ssh/known_hosts
 
     - name: Run Ansible Setup
       run: |
