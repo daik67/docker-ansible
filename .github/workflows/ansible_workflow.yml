@@ -11,9 +11,9 @@ jobs:
 
     container:
       image: ghcr.io/daik67/ansible-image:latest
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.MY_SEC }}
+    env:
+      DOCKER_USERNAME: ${{ github.actor }}
+      DOCKER_PASSWORD: ${{ secrets.MY_SEC }}
 
     steps:
     - name: Check out code
