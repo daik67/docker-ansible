@@ -29,6 +29,5 @@ jobs:
     - name: Run Ansible Setup
       run: |
         ansible --version
-        pwd
-        ls -al
-        ansible-playbook -i ansible_project/inventories/production/hosts -e "ansible_ssh_user=adminuser" ./ansible_project/site.yml
+        cd ./ansible_project
+        ansible-playbook -i inventories/production/hosts -e "ansible_ssh_user=adminuser" site.yml
