@@ -7,7 +7,7 @@ on: workflow_dispatch
 
 jobs:
   setup:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     container:
       image: ghcr.io/daik67/ansible-image:latest
