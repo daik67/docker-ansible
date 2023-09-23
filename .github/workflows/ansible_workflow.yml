@@ -30,4 +30,4 @@ jobs:
       run: |
         ansible --version
         cd ./ansible_project
-        ansible-playbook -i inventories/production/hosts -e "ansible_ssh_user=adminuser" site.yml -vvv
+        ansible-playbook -i inventories/production/hosts -e "ansible_user=adminuser" site.yml -vvv
