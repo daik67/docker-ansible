@@ -1,6 +1,6 @@
 [testservers]
 10.0.2.21
-#10.0.2.22 ansible-client2
+#10.0.2.22
 
 [testservers:vars]
 ansible_user=adminuser
