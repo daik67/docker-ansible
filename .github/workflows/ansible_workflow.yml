@@ -26,6 +26,7 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan 10.0.2.21 >> ~/.ssh/known_hosts
 #        ssh-keyscan server1 server2 >> ~/.ssh/known_hosts
+#        ssh-keyscan -f servers.txt >> ~/.ssh/known_hosts
 
     - name: Run Ansible Setup
       run: |
