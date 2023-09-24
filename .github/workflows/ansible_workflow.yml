@@ -32,4 +32,5 @@ jobs:
       run: |
         ansible --version
         cd ./ansible_project
+        ansible 10.0.2.21 -m setup
         ansible-playbook -i inventories/production/hosts -e "ansible_user=adminuser" site.yml -vvv
