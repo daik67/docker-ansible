@@ -32,7 +32,7 @@ jobs:
             echo "No interactive command found."
           fi
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_SEC }}
+          MY_SEC: ${{ secrets.MY_SEC }}
 
       - name: Post Interactive Response
         run: |
@@ -42,4 +42,4 @@ jobs:
           echo "---------------------------------"
           echo "GitHub Actions has simulated an interactive flow."
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_SEC }}
+          MY_SEC: ${{ secrets.MY_SEC }}
