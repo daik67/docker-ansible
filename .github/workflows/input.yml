@@ -1,7 +1,7 @@
 name: Interactive Workflow
 
 on:
-  workflow_dispatch:  # ユーザーが手動でワークフローをトリガーする
+  workflow_dispatch:
 
 jobs:
   interactive:
