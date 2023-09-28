@@ -1,0 +1,45 @@
+name: Interactive Flow Example
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  interactive_flow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check for Interactive Command
+        id: command
+        run: |
+          # コメントから特定のコマンドを抽出
+          COMMAND=$(echo "${{ github.event.comment.body }}" | grep -oE '/start-flow|/continue-flow|/cancel-flow')
+
+          if [ "$COMMAND" == "/start-flow" ]; then
+            echo "Starting interactive flow..."
+            # ユーザーに対してメッセージを投稿
+            echo "::set-output name=message::Interactive flow has started. What would you like to do next? (Type /continue-flow or /cancel-flow)"
+          elif [ "$COMMAND" == "/continue-flow" ]; then
+            echo "Continuing interactive flow..."
+            # ユーザーに対してメッセージを投稿
+            echo "::set-output name=message::You have chosen to continue the interactive flow. What's your next step?"
+          elif [ "$COMMAND" == "/cancel-flow" ]; then
+            echo "Cancelling interactive flow..."
+            # ユーザーに対してメッセージを投稿
+            echo "::set-output name=message::Interactive flow has been cancelled."
+          else
+            echo "No interactive command found."
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_SEC }}
+
+      - name: Post Interactive Response
+        run: |
+          # コメントに対してユーザーへの応答を投稿
+          MESSAGE="${{ steps.command.outputs.message }}"
+          echo "$MESSAGE"
+          echo "---------------------------------"
+          echo "GitHub Actions has simulated an interactive flow."
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_SEC }}
