@@ -1,0 +1,18 @@
+name: Interactive Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  interact:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git
+        uses: actions/checkout@v3
+
+      - name: Run Interactive Action
+        id: interactive
+        uses: daik67/interactive-action@v1
+
+      - name: Show Message
+        run: echo "Message from the interactive action: ${{ steps.interactive.outputs.message }}"
