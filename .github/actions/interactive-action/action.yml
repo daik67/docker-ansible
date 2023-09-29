@@ -1,9 +1,0 @@
-name: 'Interactive Action'
-description: 'An interactive GitHub Action'
-inputs:
-  number:
-    description: 'Enter a number'
-    required: true
-runs:
-  using: 'node12'
-  main: 'main.js'
