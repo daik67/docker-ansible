@@ -7,7 +7,7 @@ on:
 
 jobs:
   interactive_flow:
-    runs-on: ubuntu-latest
+    runs-on: [ self-hosted ]
 
     steps:
       - name: Check for Interactive Command
