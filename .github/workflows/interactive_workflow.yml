@@ -12,7 +12,7 @@ jobs:
 
       - name: Run Interactive Action
         id: interactive
-        uses: daik67/interactive-action@v1
+        uses: interactive-action@v1
 
       - name: Show Message
         run: echo "Message from the interactive action: ${{ steps.interactive.outputs.message }}"
