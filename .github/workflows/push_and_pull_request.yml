@@ -1,0 +1,33 @@
+name: Push and Pull Request Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  push-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and test on push
+        run: |
+          # プッシュ時のビルドおよびテスト処理を実行
+          echo "push job has done."
+
+  pull-request-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and test on pull request
+        run: |
+          # プルリクエスト時のビルドおよびテスト処理を実行
+          echo "pull_request has done."
